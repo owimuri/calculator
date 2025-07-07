@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.theme-light {
+  background: #e0e0e0;
+  color: #333
+}
+.theme-dark {
+  background: #1a1a1a;
+  color: #00ff00
+}
+
+.pixel-text {
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px rgba(0, 0, 0, 0.3), -1px 0px 0px rgba(0, 0, 0, 0.3), 0px -1px 0px rgba(0, 0, 0, 0.3);
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-display: swap
+}
+
+.calculator {
+  background: var(--calc-bg);
+  border: 6px solid var(--border-color);
+  border-radius: 0;
+  padding: 20px;
+  box-shadow: inset -6px -6px 0px var(--shadow-dark), inset 6px 6px 0px var(--shadow-light), 12px 12px 0px rgba(0,0,0,0.4);
+  position: relative
+}
+.calculator::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 3px solid var(--accent-color);
+  pointer-events: none
+}
+
+.theme-light .calculator {
+  --calc-bg: #c8c8c8;
+  --border-color: #808080;
+  --shadow-dark: #909090;
+  --shadow-light: #fff;
+  --accent-color: #606060
+}
+.theme-dark .calculator {
+  --calc-bg: #383838;
+  --border-color: #505050;
+  --shadow-dark: #181818;
+  --shadow-light: #707070;
+  --accent-color: #00ff00
+}
+
+.display {
+  background: var(--display-bg);
+  border: 4px inset var(--border-color);
+  padding: 16px;
+  margin-bottom: 16px;
+  min-height: 90px;
+  position: relative;
+  overflow: hidden
+}
+.display-error {
+  animation: error-flash 0.5s ease-in-out
+}
+
+.theme-light .display {
+  --display-bg: #000;
+  color: #00ff41
+}
+.theme-dark .display {
+  --display-bg: #001100;
+  color: #00ff41
+}
+
+.display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 65, 0.05) 2px, rgba(0, 255, 65, 0.05) 4px);
+  animation: flicker 0.15s linear infinite alternate;
+  pointer-events: none
+}
+.display::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.15) 100%);
+  pointer-events: none
+}
+
+.button-number {
+  background: var(--btn-number-bg);
+  border: 4px outset var(--btn-number-border);
+  color: var(--btn-number-text);
+  position: relative;
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important
+}
+.button-operator {
+  background: var(--btn-operator-bg);
+  border: 4px outset var(--btn-operator-border);
+  color: var(--btn-operator-text);
+  position: relative;
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important
+}
+.button-equals {
+  background: var(--btn-equals-bg);
+  border: 4px outset var(--btn-equals-border);
+  color: var(--btn-equals-text);
+  position: relative;
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important
+}
+.button-danger {
+  background: var(--btn-danger-bg);
+  border: 4px outset var(--btn-danger-border);
+  color: var(--btn-danger-text);
+  position: relative;
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important
+}
+.button-secondary {
+  background: var(--btn-secondary-bg);
+  border: 4px outset var(--btn-secondary-border);
+  color: var(--btn-secondary-text);
+  position: relative;
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important
+}
+.button-keyboard-active {
+  border-style: inset !important;
+  transform: translate(2px, 2px);
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.2)
+}
+
+.theme-light {
+  --btn-number-bg: #b8b8b8;
+  --btn-number-border: #d8d8d8;
+  --btn-number-text: #000;
+  --btn-operator-bg: #ff7700;
+  --btn-operator-border: #ffaa00;
+  --btn-operator-text: #fff;
+  --btn-equals-bg: #00bb00;
+  --btn-equals-border: #00ff00;
+  --btn-equals-text: #fff;
+  --btn-danger-bg: #bb0000;
+  --btn-danger-border: #ff0000;
+  --btn-danger-text: #fff;
+  --btn-secondary-bg: #7777bb;
+  --btn-secondary-border: #9999ff;
+  --btn-secondary-text: #fff
+}
+.theme-dark {
+  --btn-number-bg: #585858;
+  --btn-number-border: #787878;
+  --btn-number-text: #fff;
+  --btn-operator-bg: #ff5500;
+  --btn-operator-border: #ff7700;
+  --btn-operator-text: #fff;
+  --btn-equals-bg: #009900;
+  --btn-equals-border: #00bb00;
+  --btn-equals-text: #fff;
+  --btn-danger-bg: #990000;
+  --btn-danger-border: #bb0000;
+  --btn-danger-text: #fff;
+  --btn-secondary-bg: #555599;
+  --btn-secondary-border: #7777bb;
+  --btn-secondary-text: #fff
+}
+
+.panel {
+  background: var(--calc-bg);
+  border: 4px solid var(--border-color);
+  padding: 16px;
+  box-shadow: inset -3px -3px 0px var(--shadow-dark), inset 3px 3px 0px var(--shadow-light)
+}
+
+.icon-button {
+  background: var(--btn-number-bg);
+  border: 3px outset var(--btn-number-border);
+  padding: 8px;
+  color: var(--btn-number-text);
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important;
+  font-size: 10px
+}
+
+.toggle {
+  background: var(--btn-operator-bg);
+  border: 3px outset var(--btn-operator-border);
+  padding: 6px 12px;
+  color: var(--btn-operator-text);
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important;
+  font-size: 8px
+}
+
+.button-small {
+  background: var(--btn-secondary-bg);
+  border: 2px outset var(--btn-secondary-border);
+  padding: 4px 8px;
+  color: var(--btn-secondary-text);
+  font-family: 'Press Start 2P', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !important;
+  font-size: 6px
+}
+
+.history-item {
+  background: var(--display-bg);
+  border: 2px solid var(--border-color);
+  padding: 8px;
+  color: #00ff41
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  opacity: 0.6;
+  border-radius: 0
+}
+
+@keyframes glow {
+  0%, 100% { 
+    text-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px rgba(0, 0, 0, 0.3), -1px 0px 0px rgba(0, 0, 0, 0.3), 0px -1px 0px rgba(0, 0, 0, 0.3), 0 0 8px currentColor
+  }
+  50% { 
+    text-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px rgba(0, 0, 0, 0.3), -1px 0px 0px rgba(0, 0, 0, 0.3), 0px -1px 0px rgba(0, 0, 0, 0.3), 0 0 15px currentColor, 0 0 25px currentColor
+  }
+}
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg)
+  }
+  50% { 
+    transform: translateY(-25px) rotate(180deg)
+  }
+}
+@keyframes flash {
+  0% { 
+    background: var(--display-bg);
+    box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1)
+  }
+  50% { 
+    background: rgba(0, 255, 65, 0.15);
+    box-shadow: inset 0 0 30px rgba(0, 255, 65, 0.4), 0 0 25px rgba(0, 255, 65, 0.3)
+  }
+  100% { 
+    background: var(--display-bg);
+    box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1)
+  }
+}
+@keyframes error-flash {
+  0%, 100% { 
+    background: var(--display-bg)
+  }
+  50% { 
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.4), 0 0 25px rgba(255, 0, 0, 0.3)
+  }
+}
+@keyframes flicker {
+  0% { 
+    opacity: 1
+  }
+  97% { 
+    opacity: 1
+  }
+  98% {
+    opacity: 0.96
+  }
+  99% {
+    opacity: 0.92
+  }
+  100% { 
+    opacity: 0.90 
+  }
+}
+@keyframes slide-down {
+  from { 
+    transform: translateY(-25px); 
+    opacity: 0
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1
+  }
+}
+@keyframes bounce-in {
+  0% { 
+    transform: scale(0.7); 
+    opacity: 0
+  }
+  50% { 
+    transform: scale(1.1)
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 1
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-15px)
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0)
+  }
+}
+@keyframes press {
+  0% { 
+    transform: scale(1)
+  }
+  50% {
+    transform: scale(0.92)
+  }
+  100% { 
+    transform: scale(1)
+  }
+}
+
+.animate-glow { 
+  animation: glow 4s ease-in-out infinite
+}
+.animate-float { 
+  animation: float 5s ease-in-out infinite
+}
+.animate-flash { 
+  animation: flash 0.3s ease-in-out
+}
+.animate-slide-down {
+  animation: slide-down 0.4s ease-out
+}
+.animate-bounce-in { 
+  animation: bounce-in 0.6s ease-out
+}
+.animate-fade-in { 
+  animation: fade-in 0.4s ease-out
+}
+.animate-press:active { 
+  animation: press 0.15s ease-out
+}
+
+button:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+  transition: all 0.1s ease
+}
+button:active {
+  transform: translateY(2px);
+  border-style: inset;
+  filter: brightness(0.9)
+}
+
+@media (max-width: 480px) {
+  .calculator {
+    padding: 12px
+  }
+  
+  .pixel-text {
+    font-size: 0.8em
+  }
+  
+  button {
+    height: 48px;
+    font-size: 14px
+  }
+}
+
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/pressstart2p/v14/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+}
